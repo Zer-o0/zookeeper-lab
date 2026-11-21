@@ -1,0 +1,23 @@
+﻿# zk3 уже остановлен, останавливаю второй сервер: zk2
+PS> .\zk.ps1 stop 2
+zk2: остановлен
+
+PS> Start-Sleep 8
+
+
+PS> .\zk.ps1 status
+--- zk1 (порт 2181) ---
+This ZooKeeper instance is not currently serving requests
+--- zk2 (порт 2182) ---
+сервер не запущен: Connection refused
+--- zk3 (порт 2183) ---
+сервер не запущен: Connection refused
+
+PS> .\zk.ps1 cli get /hw-check
+Connecting to 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+org.apache.zookeeper.ClientCnxn$EndOfStreamException: Unable to read additional data from server sessionid 0x0, likely server has closed socket
+org.apache.zookeeper.ClientCnxn$EndOfStreamException: Unable to read additional data from server sessionid 0x0, likely server has closed socket
+Exception in thread "main" java.io.IOException: org.apache.zookeeper.KeeperException$ConnectionLossException: KeeperErrorCode = ConnectionLoss
+Caused by: org.apache.zookeeper.KeeperException$ConnectionLossException: KeeperErrorCode = ConnectionLoss
+	... 3 more
+

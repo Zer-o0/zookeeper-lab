@@ -1,0 +1,39 @@
+﻿# останавливаю текущего лидера: zk3
+PS> .\zk.ps1 stop 3
+zk3: остановлен
+
+PS> Start-Sleep 8
+
+
+PS> .\zk.ps1 status
+--- zk1 (порт 2181) ---
+Zookeeper version: 3.9.6-a355171b081b5b60749db8f19cca1528b0df936f, built on 2026-09-03 19:29 UTC
+Latency min/avg/max: 0/0.0/0
+Received: 1
+Sent: 0
+Connections: 1
+Outstanding: 0
+Zxid: 0x600000005
+Mode: follower
+Node count: 10
+--- zk2 (порт 2182) ---
+Zookeeper version: 3.9.6-a355171b081b5b60749db8f19cca1528b0df936f, built on 2026-09-03 19:29 UTC
+Latency min/avg/max: 0/0.0/0
+Received: 1
+Sent: 0
+Connections: 1
+Outstanding: 0
+Zxid: 0x700000000
+Mode: leader
+Node count: 10
+Proposal sizes last/min/max: -1/-1/-1
+--- zk3 (порт 2183) ---
+сервер не запущен: Connection refused
+
+PS> .\zk.ps1 cli set /hw-check two-of-three
+Connecting to 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+
+PS> .\zk.ps1 cli get /hw-check
+Connecting to 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+two-of-three
+

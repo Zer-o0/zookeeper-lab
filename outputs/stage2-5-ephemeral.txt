@@ -1,0 +1,37 @@
+﻿PS> .\zk.ps1 cli ls /
+Connecting to 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+[hw-check, hw4, zookeeper]
+
+# открываю второе окно: zkCli.cmd -timeout 10000 -server 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+# во втором окне введены команды: create -e /hw-ephemeral created-in-window-2; stat /hw-ephemeral
+PS> .\zk.ps1 cli ls /
+Connecting to 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+[hw-check, hw-ephemeral, hw4, zookeeper]
+
+PS> .\zk.ps1 cli stat /hw-ephemeral
+Connecting to 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+cZxid = 0x80000002d
+ctime = Sat Nov 21 21:41:39 MSK 2026
+mZxid = 0x80000002d
+mtime = Sat Nov 21 21:41:39 MSK 2026
+pZxid = 0x80000002d
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x200077759b50008
+dataLength = 19
+numChildren = 0
+
+# 21:41:48 второе окно закрыто
+PS> .\zk.ps1 cli ls /
+Connecting to 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+[hw-check, hw-ephemeral, hw4, zookeeper]
+
+PS> Start-Sleep 12
+
+
+# 21:42:01 прошло больше тайм-аута сессии второго окна (10 с)
+PS> .\zk.ps1 cli ls /
+Connecting to 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+[hw-check, hw4, zookeeper]
+

@@ -1,0 +1,48 @@
+﻿PS> .\zk.ps1 start
+zk1: запущен
+zk2: запущен
+zk3: запущен
+
+PS> Start-Sleep 12
+
+
+PS> .\zk.ps1 status
+--- zk1 (порт 2181) ---
+Zookeeper version: 3.9.6-a355171b081b5b60749db8f19cca1528b0df936f, built on 2026-09-03 19:29 UTC
+Latency min/avg/max: 0/0.0/0
+Received: 1
+Sent: 0
+Connections: 1
+Outstanding: 0
+Zxid: 0x50000004e
+Mode: follower
+Node count: 10
+--- zk2 (порт 2182) ---
+Zookeeper version: 3.9.6-a355171b081b5b60749db8f19cca1528b0df936f, built on 2026-09-03 19:29 UTC
+Latency min/avg/max: 0/0.0/0
+Received: 1
+Sent: 0
+Connections: 1
+Outstanding: 0
+Zxid: 0x50000004e
+Mode: follower
+Node count: 10
+--- zk3 (порт 2183) ---
+Zookeeper version: 3.9.6-a355171b081b5b60749db8f19cca1528b0df936f, built on 2026-09-03 19:29 UTC
+Latency min/avg/max: 0/0.0/0
+Received: 1
+Sent: 0
+Connections: 1
+Outstanding: 0
+Zxid: 0x600000000
+Mode: leader
+Node count: 10
+Proposal sizes last/min/max: -1/-1/-1
+
+PS> .\zk.ps1 cli set /hw-check three-servers
+Connecting to 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+
+PS> .\zk.ps1 cli get /hw-check
+Connecting to 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+three-servers
+

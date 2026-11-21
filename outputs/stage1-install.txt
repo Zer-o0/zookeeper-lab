@@ -1,0 +1,16 @@
+﻿PS> [Environment]::GetEnvironmentVariable("JAVA_HOME","User")
+C:\Program Files\Java\jdk-17
+PS> & "$env:JAVA_HOME\bin\java.exe" -version
+java version "17.0.12" 2024-07-16 LTS
+Java(TM) SE Runtime Environment (build 17.0.12+8-LTS-286)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.12+8-LTS-286, mixed mode, sharing)
+PS> curl.exe -sSfLO https://archive.apache.org/dist/zookeeper/zookeeper-3.9.6/apache-zookeeper-3.9.6-bin.tar.gz  (+ .sha512)
+PS> (Get-FileHash apache-zookeeper-3.9.6-bin.tar.gz -Algorithm SHA512).Hash.ToLower()
+e999626df06de30dc8bb53bb51da9bb786b1658406adafc6b92f104d72ca25e869f70a57c83a726f8b9558cc0fb519fc20f201aa5d6da09884bc4be5fe6dd3b0
+PS> Get-Content apache-zookeeper-3.9.6-bin.tar.gz.sha512
+e999626df06de30dc8bb53bb51da9bb786b1658406adafc6b92f104d72ca25e869f70a57c83a726f8b9558cc0fb519fc20f201aa5d6da09884bc4be5fe6dd3b0  apache-zookeeper-3.9.6-bin.tar.gz
+PS> tar -xzf apache-zookeeper-3.9.6-bin.tar.gz; 1..3 | % { Copy-Item -Recurse apache-zookeeper-3.9.6-bin zk$_; Set-Content zk$_\data\myid $_ }
+PS> 1..3 | % { "zk$_ myid=" + (Get-Content zk$_\data\myid) }
+zk1 myid=1
+zk2 myid=2
+zk3 myid=3
